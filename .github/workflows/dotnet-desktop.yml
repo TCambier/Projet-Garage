@@ -7,8 +7,8 @@ on:
     branches: ["main"]
 
 env:
-  SOLUTION_PATH: Garage/Garage/Garage/Garage/Garage.sln
-  PROJECT_PATH: Garage/Garage/Garage/Garage/Garage/Garage.csproj
+  SOLUTION_PATH: Garage/Garage/Garage/Garage.sln
+  PROJECT_PATH: Garage/Garage/Garage/Garage/Garage.csproj
   BUILD_CONFIGURATION: Release
   RUNTIME_IDENTIFIER: win-x64
 
