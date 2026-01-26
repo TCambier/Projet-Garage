@@ -1,0 +1,51 @@
+name: .NET Desktop CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+env:
+  SOLUTION_PATH: Garage/Garage/Garage/Garage/Garage.sln
+  PROJECT_PATH: Garage/Garage/Garage/Garage/Garage/Garage.csproj
+  BUILD_CONFIGURATION: Release
+  RUNTIME_IDENTIFIER: win-x64
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.nuget/packages
+            ~/.local/share/NuGet/v3-cache
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore $env:SOLUTION_PATH
+
+      - name: Build
+        run: dotnet build $env:SOLUTION_PATH --configuration $env:BUILD_CONFIGURATION --no-restore
+
+      - name: Publish Windows artifact
+        run: dotnet publish $env:PROJECT_PATH --configuration $env:BUILD_CONFIGURATION --runtime $env:RUNTIME_IDENTIFIER --self-contained false --output $env:RUNNER_TEMP/publish
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Garage-${{ env.BUILD_CONFIGURATION }}-${{ env.RUNTIME_IDENTIFIER }}
+          path: ${{ env.RUNNER_TEMP }}\\publish
