@@ -6,6 +6,7 @@ Ce projet est réalisé dans le cadre du BTS SIO / SN / autres, par un groupe de
 ________________________________________
 2. Objectifs du projet
 L’objectif principal est de développer une application desktop permettant :
+
 ●	de gérer un parc de véhicules,
 
 ●	d’enregistrer les opérations d’entretien et les réparations,
@@ -23,6 +24,7 @@ ________________________________________
 3. Périmètre fonctionnel
 3.1 Connexion & Gestion des rôles
 L’application doit proposer :
+
 ●	une page de connexion,
 
 ●	une vérification des identifiants dans une base de données,
@@ -37,6 +39,7 @@ La connexion doit s’appuyer sur un mot de passe hashé (SHA256).
 ________________________________________
 3.2 Gestion du parc automobile
 L’utilisateur doit pouvoir :
+
 ●	ajouter, modifier, supprimer un véhicule,
 
 ●	consulter la liste des véhicules,
@@ -63,6 +66,7 @@ Chaque véhicule doit contenir les informations suivantes :
 ________________________________________
 3.3 Gestion des entretiens & réparations
 Pour chaque véhicule :
+
 ●	ajouter une intervention (vidange, freins, pneus, CT, etc.),
 
 ●	renseigner le garage, la date, le coût, la durée,
@@ -83,6 +87,7 @@ Restrictions :
 ________________________________________
 3.4 Alertes de maintenance
 Le logiciel doit générer automatiquement des alertes basées sur :
+
 ●	le kilométrage (ex : vidange tous les 15 000 km),
 
 ●	la date (ex : contrôle technique tous les 2 ans),
@@ -99,6 +104,7 @@ Les alertes doivent apparaître :
 ________________________________________
 3.5 Statistiques
 Le module de statistiques doit offrir :
+
 ●	coût total par véhicule,
 
 ●	répartition des types d’interventions,
@@ -117,6 +123,7 @@ Accès :
 ________________________________________
 3.6 Exports
 L’application doit permettre :
+
 ●	export PDF d’un rapport complet d’un véhicule,
 
 ●	export CSV de l’historique des entretiens.
@@ -124,6 +131,7 @@ L’application doit permettre :
 ________________________________________
 4. Contraintes techniques
 4.1 Technologies
+   
 ●	Langage : C# (.NET)
 
 ●	Interface : WPF
@@ -161,6 +169,7 @@ Le code doit être :
 ________________________________________
 5. Contraintes ergonomiques
 L’interface doit :
+
 ●	être intuitive,
 
 ●	proposer un thème clair (et éventuellement sombre),
@@ -173,6 +182,7 @@ L’interface doit :
 
 ________________________________________
 6. Livrables
+   
 ●	Cahier des charges (ce document)
 
 ●	Modèle UML (cas d’utilisation + classes)
@@ -192,6 +202,7 @@ ________________________________________
 ________________________________________
 7. Critères de réussite
 Le projet sera considéré comme réussi si :
+
 ●	toutes les fonctionnalités décrites sont présentes,
 
 ●	les rôles fonctionnent correctement,
