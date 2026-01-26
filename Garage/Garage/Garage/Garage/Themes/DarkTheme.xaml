@@ -1,0 +1,37 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Global surfaces -->
+  <SolidColorBrush x:Key="AppBackgroundBrush" Color="#0B1220"/>
+  <SolidColorBrush x:Key="SurfaceBrush" Color="#0F172A"/>
+  <SolidColorBrush x:Key="SurfaceAltBrush" Color="#111827"/>
+
+  <!-- Sidebar -->
+  <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#0A1020"/>
+  <SolidColorBrush x:Key="SidebarBrandCircleBrush" Color="#1F2937"/>
+  <SolidColorBrush x:Key="SidebarTextBrush" Color="#F9FAFB"/>
+  <SolidColorBrush x:Key="SidebarMutedTextBrush" Color="#9CA3AF"/>
+  <SolidColorBrush x:Key="SidebarHoverBrush" Color="#1E3A8A"/>
+
+  <!-- Text -->
+  <SolidColorBrush x:Key="TextPrimaryBrush" Color="#F9FAFB"/>
+  <SolidColorBrush x:Key="TextSecondaryBrush" Color="#9CA3AF"/>
+
+  <!-- Misc -->
+  <SolidColorBrush x:Key="AvatarBackgroundBrush" Color="#1F2937"/>
+  <SolidColorBrush x:Key="AvatarTextBrush" Color="#E5E7EB"/>
+  <SolidColorBrush x:Key="DangerSurfaceBrush" Color="#7F1D1D"/>
+  <SolidColorBrush x:Key="DangerTextBrush" Color="#FCA5A5"/>
+
+  <SolidColorBrush x:Key="AccentBrush" Color="#3B82F6"/>
+  <SolidColorBrush x:Key="SuccessBrush" Color="#22C55E"/>
+  <SolidColorBrush x:Key="DangerBrush" Color="#EF4444"/>
+
+  <SolidColorBrush x:Key="OverlayBrush" Color="#80000000"/>
+  <SolidColorBrush x:Key="BorderBrush" Color="#334155"/>
+  <SolidColorBrush x:Key="FieldLabelBrush" Color="#CBD5E1"/>
+
+  <!-- Lists -->
+  <SolidColorBrush x:Key="ListItemBackgroundBrush" Color="#111827"/>
+  <SolidColorBrush x:Key="ListItemHoverBrush" Color="#1E293B"/>
+  <SolidColorBrush x:Key="ListItemSelectedBrush" Color="#1D4ED8"/>
+</ResourceDictionary>

@@ -1,0 +1,168 @@
+<Page x:Class="Garage.Views.LoginView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Title="Login">
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
+
+    <!-- Permet de lancer la commande de connexion avec la touche Entrée -->
+    <Page.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
+    </Page.InputBindings>
+
+    <Grid Background="{DynamicResource AppBackgroundBrush}">
+
+        <!-- Carte principale -->
+        <Border Background="{DynamicResource SurfaceBrush}"
+                CornerRadius="18"
+                Padding="40"
+                Width="380"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+            <!-- Ombre propre (UN SEUL Effect) -->
+            <Border.Effect>
+                <DropShadowEffect Color="#888"
+                                  BlurRadius="20"
+                                  ShadowDepth="4"
+                                  Opacity="0.35" />
+            </Border.Effect>
+
+            <StackPanel>
+
+                <!-- Titre -->
+                <TextBlock Text="Connexion"
+                           FontSize="30"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0 0 0 25"/>
+
+                <!-- Input utilisateur -->
+                <Grid Margin="0 0 0 15">
+                    <TextBox x:Name="UsernameBox"
+                             Padding="10"
+                             Height="40"
+                             FontSize="14"
+                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="BorderBrush" Value="#CCCCCC"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Background" Value="#FAFAFA"/>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <!-- Placeholder utilisateur -->
+                    <TextBlock Text="Nom d'utilisateur"
+                               Margin="10,0,0,0"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource TextSecondaryBrush}"
+                               IsHitTestVisible="False">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=UsernameBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Mot de passe -->
+                <Grid Margin="0 0 0 15">
+                    <PasswordBox Padding="10"
+                                 Height="40"
+                                 FontSize="14"
+                                 Name="PasswordBox"
+                                 PasswordChanged="PasswordBox_OnPasswordChanged"/>
+
+                    <!-- Placeholder mot de passe -->
+                    <TextBlock Text="Mot de passe"
+                               Margin="10,0,0,0"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource TextSecondaryBrush}"
+                               IsHitTestVisible="False">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Password}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Password}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Bouton login -->
+                <Button Content="Se connecter"
+                        Command="{Binding LoginCommand}"
+                        Height="45"
+                        Background="#3498db"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Margin="0 10 0 0"
+                        Cursor="Hand"
+                        BorderThickness="0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#3498db"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="10"
+                                                Padding="10">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#2C80C7"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="#226DA8"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <!-- Lien vers la création de compte -->
+                <TextBlock HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <Run Text="Pas encore de compte ? " />
+                    <Hyperlink Command="{Binding NavigateToRegisterCommand}" Cursor="Hand">
+                        <Run Text="Créer un compte" />
+                    </Hyperlink>
+                </TextBlock>
+
+                <!-- Message d'erreur -->
+                <TextBlock Text="{Binding ErrorMessage}"
+                           Foreground="Red"
+                           Visibility="{Binding HasError, Converter={StaticResource BoolToVisibilityConverter}}"
+                           Margin="10"
+                           TextAlignment="Center"/>
+            </StackPanel>
+
+        </Border>
+    </Grid>
+</Page>
