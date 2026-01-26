@@ -1,218 +1,172 @@
-Cahier des charges – Application de Gestion de Maintenance d’un Parc Automobile
-1. Contexte du projet
-Une entreprise possède un parc automobile composé de plusieurs véhicules utilisés au quotidien. Elle souhaite disposer d’un logiciel interne permettant de gérer l’ensemble des opérations de maintenance afin d’assurer le suivi des entretiens, d’éviter les retards, et de maîtriser les coûts.
- Le logiciel doit être simple d’utilisation, sécurisé, et adapté aux différents rôles du personnel : patron, mécanicien et secrétaire.
-Ce projet est réalisé dans le cadre du BTS SIO / SN / autres, par un groupe de deux étudiants, en C# avec interface graphique sous WPF.
-________________________________________
-2. Objectifs du projet
-L’objectif principal est de développer une application desktop permettant :
+# 🚗 Application de Gestion de Maintenance d’un Parc Automobile
 
-●	de gérer un parc de véhicules,
+Application desktop permettant de gérer la maintenance d’un parc automobile : suivi des véhicules, entretiens, alertes automatiques et statistiques de coûts.
 
-●	d’enregistrer les opérations d’entretien et les réparations,
+Projet réalisé dans le cadre d’un **BTS SIO / SN** par un groupe de deux étudiants, en **C# (.NET) avec interface WPF**, selon l’architecture **MVVM**.
 
-●	de suivre l’historique de maintenance,
+---
 
-●	de générer des alertes automatiques pour les entretiens périodiques,
+## 📌 Contexte du projet
 
-●	de produire des statistiques sur l’état du parc et les coûts,
+Une entreprise dispose d’un parc automobile utilisé quotidiennement.  
+Elle souhaite un **logiciel interne** permettant :
 
-●	de sécuriser l’accès via une authentification avec rôles.
+- d’assurer le suivi des entretiens,
+- d’éviter les retards de maintenance,
+- de maîtriser les coûts,
+- de sécuriser l’accès selon les rôles des utilisateurs.
 
-Le logiciel doit offrir une interface ergonomique, intuitive, et adaptée au poste de travail utilisé.
-________________________________________
-3. Périmètre fonctionnel
-3.1 Connexion & Gestion des rôles
-L’application doit proposer :
+L’application doit être **simple d’utilisation**, **sécurisée** et **adaptée aux différents profils** (patron, mécanicien, secrétaire).
 
-●	une page de connexion,
+---
 
-●	une vérification des identifiants dans une base de données,
+## 🎯 Objectifs
 
-●	un système de rôles avec permissions :
+L’application permet de :
 
-Rôle	Droits
-Patron	Tous les droits (gestion véhicules, entretiens, coûts, statistiques, gestion utilisateurs)
-Mécanicien	Consultation véhicules + ajout d’entretiens
-Secrétaire	Gestion administrative (ajout véhicules, consultation historique) mais restrictions sur les coûts et suppressions
-La connexion doit s’appuyer sur un mot de passe hashé (SHA256).
-________________________________________
-3.2 Gestion du parc automobile
-L’utilisateur doit pouvoir :
+- gérer un parc de véhicules,
+- enregistrer les opérations d’entretien et de réparation,
+- consulter l’historique de maintenance,
+- générer des alertes automatiques,
+- produire des statistiques détaillées,
+- sécuriser l’accès via une authentification avec rôles.
 
-●	ajouter, modifier, supprimer un véhicule,
+---
 
-●	consulter la liste des véhicules,
+## 👥 Gestion des utilisateurs et des rôles
 
-●	rechercher/filtrer par immatriculation, modèle, statut
+### Authentification
+- Page de connexion sécurisée
+- Mots de passe **hashés (SHA256)**
+- Vérification via base de données
 
-●	consulter la fiche détaillée d’un véhicule.
+### Rôles et permissions
 
-Chaque véhicule doit contenir les informations suivantes :
-●	immatriculation,
+| Rôle        | Droits |
+|------------|--------|
+| **Patron** | Tous les droits : véhicules, entretiens, coûts, statistiques, utilisateurs |
+| **Mécanicien** | Consultation des véhicules + ajout d’entretiens |
+| **Secrétaire** | Gestion administrative, consultation de l’historique (restrictions sur coûts et suppressions) |
 
-●	marque, modèle,
+---
 
-●	année,
+## 🚘 Gestion du parc automobile
 
-●	kilométrage actuel,
+Fonctionnalités :
+- Ajouter, modifier, supprimer un véhicule
+- Consulter la liste des véhicules
+- Rechercher / filtrer (immatriculation, modèle, statut)
+- Accéder à la fiche détaillée d’un véhicule
 
-●	date du dernier entretien,
+### Informations d’un véhicule
+- Immatriculation  
+- Marque et modèle  
+- Année  
+- Kilométrage actuel  
+- Date du dernier entretien  
+- Statut (en service, hors service, en réparation)  
+- Type de carburant  
 
-●	statut (en service, hors service, en réparation),
+---
 
-●	type de carburant.
+## 🔧 Gestion des entretiens et réparations
 
-________________________________________
-3.3 Gestion des entretiens & réparations
 Pour chaque véhicule :
+- Ajout d’une intervention (vidange, pneus, freins, CT…)
+- Informations : garage, date, durée, coût
+- Mise à jour automatique du kilométrage et des dates
+- Consultation de l’historique complet
 
-●	ajouter une intervention (vidange, freins, pneus, CT, etc.),
+### Restrictions par rôle
+- **Mécanicien** : ajout uniquement
+- **Secrétaire** : consultation, pas de modification des coûts
+- **Patron** : accès complet
 
-●	renseigner le garage, la date, le coût, la durée,
+---
 
-●	associer un modèle de type d’entretien,
+## ⏰ Alertes de maintenance
 
-●	mise à jour des données du véhicule (kilométrage, dates),
+Alertes automatiques basées sur :
+- le kilométrage (ex : vidange tous les 15 000 km),
+- la date (ex : contrôle technique tous les 2 ans),
+- l’historique des entretiens,
+- des seuils paramétrables.
 
-●	consultation de l’historique complet.
+Les alertes sont visibles :
+- sur le tableau de bord,
+- sur la fiche du véhicule concerné.
 
-Restrictions :
-●	le mécanicien peut ajouter mais pas supprimer,
+---
 
-●	le secrétaire peut consulter mais pas modifier les coûts,
+## 📊 Statistiques
 
-●	le patron a tous les accès.
+Module réservé au **rôle Patron** :
 
-________________________________________
-3.4 Alertes de maintenance
-Le logiciel doit générer automatiquement des alertes basées sur :
+- coût total par véhicule,
+- répartition des types d’interventions,
+- coûts mensuels et annuels,
+- top 5 des véhicules les plus coûteux,
+- nombre d’interventions par type,
+- graphiques d’évolution.
 
-●	le kilométrage (ex : vidange tous les 15 000 km),
+---
 
-●	la date (ex : contrôle technique tous les 2 ans),
+## 📤 Exports
 
-●	la date d’un entretien précédent,
+- Export **PDF** du rapport complet d’un véhicule
+- Export **CSV** de l’historique des entretiens
 
-●	des seuils paramétrables dans la base.
+---
 
-Les alertes doivent apparaître :
-●	sur le tableau de bord,
+## 🛠️ Technologies utilisées
 
-●	et sur la fiche du véhicule concerné.
+- **Langage** : C# (.NET)
+- **Interface** : WPF
+- **Architecture** : MVVM
+- **Base de données** : SQLite
+- **Accès aux données** : LINQ / Entity Framework
+- **Outils** : Visual Studio
 
-________________________________________
-3.5 Statistiques
-Le module de statistiques doit offrir :
+---
 
-●	coût total par véhicule,
+## 🔐 Sécurité
 
-●	répartition des types d’interventions,
+- Mots de passe hashés
+- Requêtes paramétrées
+- Gestion stricte des droits par rôle
+- Aucune donnée sensible stockée en clair
 
-●	coûts mensuels / annuels,
+---
 
-●	top 5 véhicules les plus coûteux,
+## 🎨 Ergonomie
 
-●	nombre d’interventions par type,
+- Interface intuitive et claire
+- Thème clair (option sombre possible)
+- Écrans épurés
+- Boutons explicites
+- Dialogues de confirmation pour les actions critiques
 
-●	graphiques d’évolution (coûts, interventions).
+---
 
-Accès :
-●	réservé au rôle patron.
+## 📦 Livrables
 
-________________________________________
-3.6 Exports
-L’application doit permettre :
+- Cahier des charges
+- Diagrammes UML (cas d’utilisation + classes)
+- Schéma de base de données
+- Maquettes WPF
+- Code source
+- Exécutable final
+- Dossier technique et utilisateur
+- Présentation orale
 
-●	export PDF d’un rapport complet d’un véhicule,
+---
 
-●	export CSV de l’historique des entretiens.
+## ✅ Critères de réussite
 
-________________________________________
-4. Contraintes techniques
-4.1 Technologies
-   
-●	Langage : C# (.NET)
-
-●	Interface : WPF
-
-●	Architecture : MVVM
-
-●	Base de données : SQLite
-
-●	Outils : LINQ, Entity Framework (ou requêtes SQL)
-
-4.2 Sécurité
-●	Mots de passe hashés
-
-●	Requêtes protégées (paramétrées)
-
-●	Limitation des droits selon rôle
-
-●	Pas de stockage de données sensibles en clair
-
-4.3 Performance
-●	Application fluide, même avec plusieurs centaines de véhicules
-
-●	Chargement des listes optimisé
-
-●	Mise en cache simple des données si nécessaire
-
-4.4 Maintenance & Evolutivité
-Le code doit être :
-●	commenté,
-
-●	organisé selon MVVM,
-
-●	facilement extensible (ex : ajout de conducteurs, planning, pièces détachées).
-
-________________________________________
-5. Contraintes ergonomiques
-L’interface doit :
-
-●	être intuitive,
-
-●	proposer un thème clair (et éventuellement sombre),
-
-●	afficher peu d’informations par écran,
-
-●	utiliser des boutons clairement identifiés,
-
-●	proposer des dialogues de confirmation pour les actions critiques.
-
-________________________________________
-6. Livrables
-   
-●	Cahier des charges (ce document)
-
-●	Modèle UML (cas d’utilisation + classes)
-
-●	Schéma de la base de données
-
-●	Maquettes des interfaces WPF
-
-●	Code source complet
-
-●	Exécutable final
-
-●	Dossier technique + dossier utilisateur
-
-●	Présentation orale
-
-________________________________________
-7. Critères de réussite
-Le projet sera considéré comme réussi si :
-
-●	toutes les fonctionnalités décrites sont présentes,
-
-●	les rôles fonctionnent correctement,
-
-●	la base de données est cohérente et fonctionnelle,
-
-●	l’interface est ergonomique et stable,
-
-●	les statistiques sont correctes et exploitables,
-
-●	le logiciel est présenté de manière professionnelle.
-
-
+Le projet est validé si :
+- toutes les fonctionnalités sont implémentées,
+- les rôles fonctionnent correctement,
+- la base de données est cohérente,
+- l’interface est stable et ergonomique,
+- les statistiques sont exploitables,
+- la présentation est professionnelle.
