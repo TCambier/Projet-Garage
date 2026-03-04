@@ -1,0 +1,9 @@
+{
+  "ConnectionStrings": {
+    "GarageDb": "server=localhost;database=garage;user=garage_app;password=***;"
+  },
+  "AdminAccount": {
+    "Identifiant": "Admin",
+    "Password": "ChangeMe!"
+  }
+}

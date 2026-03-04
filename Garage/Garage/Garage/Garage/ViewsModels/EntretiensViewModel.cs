@@ -156,6 +156,7 @@ namespace Garage.ViewModels
         public ICommand NavigateToVehiculesCommand { get; }
         public ICommand NavigateToStatistiquesCommand { get; }
         public ICommand NavigateToSettingsCommand { get; }
+        public ICommand NavigateToPiecesCommand { get; }
 
         public EntretiensViewModel()
         {
@@ -188,6 +189,7 @@ namespace Garage.ViewModels
             NavigateToVehiculesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Vehicules"));
             NavigateToStatistiquesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Statistiques"));
             NavigateToSettingsCommand = new RelayCommand(_ => App.Nav.NavigateTo("Settings"));
+            NavigateToPiecesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Pieces"));
         }
 
         private void LoadMaintenances()
@@ -383,6 +385,20 @@ namespace Garage.ViewModels
                 using (var ctx = new GarageDbContext(App.ConnectionString))
                 using (var tx = ctx.Database.BeginTransaction())
                 {
+                    // Vérifier que le kilométrage n'est pas inférieur au dernier kilométrage enregistré pour ce véhicule
+                    var lastKm = ctx.Maintenances
+                        .Where(m => m.Immatriculation == NewMaintenance.Immatriculation)
+                        .OrderByDescending(m => m.DateIntervention)
+                        .ThenByDescending(m => m.Id)
+                        .Select(m => (int?)m.Kilometrage)
+                        .FirstOrDefault() ?? 0;
+
+                    if (NewMaintenance.Kilometrage < lastKm)
+                    {
+                        MessageBox.Show($"Le kilométrage ({NewMaintenance.Kilometrage} km) ne peut pas être inférieur au dernier kilométrage enregistré ({lastKm} km) pour ce véhicule.");
+                        return;
+                    }
+
                     // On sécurise le coût mini côté base aussi (mais on force ici pour l'IHM)
                     if (NewMaintenance.Cout < NewPiecesTotal)
                         NewMaintenance.Cout = NewPiecesTotal;
@@ -409,8 +425,22 @@ namespace Garage.ViewModels
                         });
                     }
 
+                    // Mettre à jour le kilométrage du véhicule dans la table voiture
+                    var vehicle = ctx.Vehicles.SingleOrDefault(v => v.Immatriculation == NewMaintenance.Immatriculation);
+                    if (vehicle != null)
+                    {
+                        vehicle.Kilometrage = NewMaintenance.Kilometrage;
+                    }
+
                     ctx.SaveChanges();
                     tx.Commit();
+                }
+
+                // Mettre à jour le kilométrage côté IHM
+                var localVehicle = AvailableVehicles.FirstOrDefault(v => v.Immatriculation == NewMaintenance.Immatriculation);
+                if (localVehicle != null)
+                {
+                    localVehicle.Kilometrage = NewMaintenance.Kilometrage;
                 }
 
                 // libellé IHM (persisté via table utilise, mais affichage via champ non-mappé)
@@ -482,6 +512,20 @@ namespace Garage.ViewModels
                     if (entity == null)
                         throw new Exception("Entretien introuvable en base");
 
+                    // Vérifier que le kilométrage n'est pas inférieur au dernier kilométrage enregistré (hors entretien en cours)
+                    var lastKm = ctx.Maintenances
+                        .Where(m => m.Immatriculation == EditMaintenance.Immatriculation && m.Id != EditMaintenance.Id)
+                        .OrderByDescending(m => m.DateIntervention)
+                        .ThenByDescending(m => m.Id)
+                        .Select(m => (int?)m.Kilometrage)
+                        .FirstOrDefault() ?? 0;
+
+                    if (EditMaintenance.Kilometrage < lastKm)
+                    {
+                        MessageBox.Show($"Le kilométrage ({EditMaintenance.Kilometrage} km) ne peut pas être inférieur au dernier kilométrage enregistré ({lastKm} km) pour ce véhicule.");
+                        return;
+                    }
+
                     entity.Type = EditMaintenance.Type;
                     entity.Immatriculation = EditMaintenance.Immatriculation;
                     entity.DateIntervention = EditMaintenance.DateIntervention;
@@ -491,7 +535,21 @@ namespace Garage.ViewModels
                     entity.Id_Utilisateur = EditMaintenance.Id_Utilisateur;
                     entity.Statut = EditMaintenance.Statut;
 
+                    // Mettre à jour le kilométrage du véhicule dans la table voiture
+                    var vehicle = ctx.Vehicles.SingleOrDefault(v => v.Immatriculation == EditMaintenance.Immatriculation);
+                    if (vehicle != null && EditMaintenance.Kilometrage > vehicle.Kilometrage)
+                    {
+                        vehicle.Kilometrage = EditMaintenance.Kilometrage;
+                    }
+
                     ctx.SaveChanges();
+                }
+
+                // Mettre à jour le kilométrage côté IHM
+                var localVehicle = AvailableVehicles.FirstOrDefault(v => v.Immatriculation == EditMaintenance.Immatriculation);
+                if (localVehicle != null && EditMaintenance.Kilometrage > localVehicle.Kilometrage)
+                {
+                    localVehicle.Kilometrage = EditMaintenance.Kilometrage;
                 }
 
                 if (_maintenanceBeingEdited != null)

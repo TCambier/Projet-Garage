@@ -28,6 +28,7 @@ namespace Garage.ViewModels
         public ICommand NavigateToVehiculesCommand { get; }
         public ICommand NavigateToEntretiensCommand { get; }
         public ICommand NavigateToStatistiquesCommand { get; }
+        public ICommand NavigateToPiecesCommand { get; }
 
         public SettingsViewModel()
         {
@@ -37,6 +38,7 @@ namespace Garage.ViewModels
             NavigateToVehiculesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Vehicules"));
             NavigateToEntretiensCommand = new RelayCommand(_ => App.Nav.NavigateTo("Entretiens"));
             NavigateToStatistiquesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Statistiques"));
+            NavigateToPiecesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Pieces"));
         }
     }
 }

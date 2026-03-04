@@ -1,37 +1,38 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Global surfaces -->
-  <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F5F6FA"/>
-  <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF"/>
-  <SolidColorBrush x:Key="SurfaceAltBrush" Color="#F9FAFB"/>
 
-  <!-- Sidebar -->
-  <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#111827"/>
-  <SolidColorBrush x:Key="SidebarBrandCircleBrush" Color="#1F2937"/>
-  <SolidColorBrush x:Key="SidebarTextBrush" Color="#FFFFFF"/>
-  <SolidColorBrush x:Key="SidebarMutedTextBrush" Color="#9CA3AF"/>
-  <SolidColorBrush x:Key="SidebarHoverBrush" Color="#1F4068"/>
+    <!-- Fond général de l'application -->
+    <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F3F4F6"/>
 
-  <!-- Text -->
-  <SolidColorBrush x:Key="TextPrimaryBrush" Color="#111827"/>
-  <SolidColorBrush x:Key="TextSecondaryBrush" Color="#6B7280"/>
+    <!-- Surface principale (carte blanche) -->
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="SurfaceAltBrush" Color="#F9FAFB"/>
 
-  <!-- Misc -->
-  <SolidColorBrush x:Key="AvatarBackgroundBrush" Color="#E5E7EB"/>
-  <SolidColorBrush x:Key="AvatarTextBrush" Color="#4B5563"/>
-  <SolidColorBrush x:Key="DangerSurfaceBrush" Color="#FEE2E2"/>
-  <SolidColorBrush x:Key="DangerTextBrush" Color="#B91C1C"/>
+    <!-- Texte -->
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#111827"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#6B7280"/>
 
-  <SolidColorBrush x:Key="AccentBrush" Color="#2563EB"/>
-  <SolidColorBrush x:Key="SuccessBrush" Color="#16A34A"/>
-  <SolidColorBrush x:Key="DangerBrush" Color="#DC2626"/>
+    <!-- Sidebar -->
+    <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#1E293B"/>
+    <SolidColorBrush x:Key="SidebarTextBrush" Color="#F1F5F9"/>
+    <SolidColorBrush x:Key="SidebarMutedTextBrush" Color="#94A3B8"/>
+    <SolidColorBrush x:Key="SidebarHoverBrush" Color="#334155"/>
+    <SolidColorBrush x:Key="SidebarBrandCircleBrush" Color="#3B82F6"/>
 
-  <SolidColorBrush x:Key="OverlayBrush" Color="#80000000"/>
-  <SolidColorBrush x:Key="BorderBrush" Color="#D1D5DB"/>
-  <SolidColorBrush x:Key="FieldLabelBrush" Color="#374151"/>
+    <!-- Avatar -->
+    <SolidColorBrush x:Key="AvatarBackgroundBrush" Color="#DBEAFE"/>
+    <SolidColorBrush x:Key="AvatarTextBrush" Color="#1D4ED8"/>
 
-  <!-- Lists -->
-  <SolidColorBrush x:Key="ListItemBackgroundBrush" Color="#F9FAFB"/>
-  <SolidColorBrush x:Key="ListItemHoverBrush" Color="#E5F1FF"/>
-  <SolidColorBrush x:Key="ListItemSelectedBrush" Color="#DBEAFE"/>
+    <!-- Danger -->
+    <SolidColorBrush x:Key="DangerSurfaceBrush" Color="#FEE2E2"/>
+    <SolidColorBrush x:Key="DangerTextBrush" Color="#B91C1C"/>
+
+    <!-- Overlay (pour dialogs/popups) -->
+    <SolidColorBrush x:Key="OverlayBrush" Color="#80000000"/>
+
+    <!-- Listes -->
+    <SolidColorBrush x:Key="ListItemBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="ListItemHoverBrush" Color="#F3F4F6"/>
+    <SolidColorBrush x:Key="ListItemSelectedBrush" Color="#DBEAFE"/>
+
 </ResourceDictionary>

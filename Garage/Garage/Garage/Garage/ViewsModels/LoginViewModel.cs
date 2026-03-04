@@ -60,8 +60,11 @@ namespace GarageApp.ViewModels
             // --- LOGIN AVEC AuthService ---
             if (App.Auth.Login(Username, Password))
             {
-                // utilise le service de navigation par clé
-                App.Nav.NavigateTo("Dashboard");
+                // Redirige les clients vers leur espace dédié (lecture seule)
+                if (App.Auth.CurrentUser.Statut == Role.Client)
+                    App.Nav.NavigateTo("ClientDashboard");
+                else
+                    App.Nav.NavigateTo("Dashboard");
                 return;
             }
 

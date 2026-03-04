@@ -40,6 +40,7 @@ namespace Garage.ViewModels
         public ICommand NavigateToEntretiensCommand { get; }
         public ICommand NavigateToStatistiquesCommand { get; }
         public ICommand NavigateToSettingsCommand { get; }
+        public ICommand NavigateToPiecesCommand { get; }
 
         public DashboardViewModel()
         {
@@ -71,6 +72,7 @@ namespace Garage.ViewModels
             NavigateToEntretiensCommand = new RelayCommand(_ => App.Nav.NavigateTo("Entretiens"));
             NavigateToStatistiquesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Statistiques"));
             NavigateToSettingsCommand = new RelayCommand(_ => App.Nav.NavigateTo("Settings"));
+            NavigateToPiecesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Pieces"));
 
             LoadDashboardData();
         }

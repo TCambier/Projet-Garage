@@ -121,6 +121,7 @@ namespace Garage.ViewModels
         public ICommand NavigateToEntretiensCommand { get; }
         public ICommand NavigateToStatistiquesCommand { get; }
         public ICommand NavigateToSettingsCommand { get; }
+        public ICommand NavigateToPiecesCommand { get; }
         public ICommand DeleteVehicleCommand { get; }
         public ICommand EditVehicleCommand { get; }
         public ICommand SaveEditVehicleCommand { get; }
@@ -151,6 +152,7 @@ namespace Garage.ViewModels
             NavigateToEntretiensCommand = new RelayCommand(_ => App.Nav.NavigateTo("Entretiens"));
             NavigateToStatistiquesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Statistiques"));
             NavigateToSettingsCommand = new RelayCommand(_ => App.Nav.NavigateTo("Settings"));
+            NavigateToPiecesCommand = new RelayCommand(_ => App.Nav.NavigateTo("Pieces"));
             DeleteVehicleCommand = new RelayCommand(v => DeleteVehicle(v as Vehicle), v => v is Vehicle);
             EditVehicleCommand = new RelayCommand(v => OpenEditDialog(v as Vehicle), v => v is Vehicle);
             SaveEditVehicleCommand = new RelayCommand(_ => SaveEditedVehicle(), _ => CanSaveEditedVehicle());

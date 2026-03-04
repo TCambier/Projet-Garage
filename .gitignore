@@ -1,0 +1,14 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Secrets / configuration locale
+appsettings.json
+!appsettings.json.example
+.env
+*.env

@@ -48,4 +48,11 @@ public class Vehicle
 
     [NotMapped]
     public ICollection<MaintenanceRecord> Maintenances { get; set; } = new List<MaintenanceRecord>();
+
+    /// <summary>
+    /// Statut d'affichage calculé côté client.
+    /// Tient compte des entretiens en cours pour afficher "En Cours" au lieu du statut BD.
+    /// </summary>
+    [NotMapped]
+    public string StatutAffiche { get; set; }
 }
